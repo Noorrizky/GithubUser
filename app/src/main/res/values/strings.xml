@@ -2,5 +2,6 @@
 
         <string name="app_name">SubmissionOneVtwo</string>
         <string name="default_name">Name</string>
+        <string name="avatar_image">avatar</string>
 
 </resources>

@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.submissiononevtwo.R
 import com.example.submissiononevtwo.data.response.ItemsItem
 import com.example.submissiononevtwo.databinding.ItemReviewBinding
 
@@ -23,6 +25,10 @@ class ReviewAdapter : ListAdapter<ItemsItem, ReviewAdapter.MyViewHolder>(DIFF_CA
     class MyViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ItemsItem) {
             binding.tvItem.text = item.login
+            Glide.with(binding.root.context)
+                .load(item.avatarUrl)
+                .placeholder(R.drawable.placeholder_avatar)
+                .into(binding.ivAvatar)
         }
     }
 

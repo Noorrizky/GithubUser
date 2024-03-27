@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-        private const val query = "Nijika"
+        private const val query = "Noorriz"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

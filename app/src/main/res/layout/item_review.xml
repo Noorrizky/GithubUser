@@ -1,12 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tvItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    tools:text="List" />
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/avatar_image"
+        android:src="@drawable/placeholder_avatar"/>
+
+    <TextView
+        android:id="@+id/tvItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        tools:text="List" />
+
+</LinearLayout>
