@@ -12,7 +12,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/avatar_image"
-        android:src="@drawable/placeholder_avatar"/>
+        android:src="@drawable/placeholder_avatar"
+        />
+<!--        android:background="@drawable/circle_background"-->
 
     <TextView
         android:id="@+id/tvItem"
