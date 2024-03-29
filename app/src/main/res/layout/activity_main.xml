@@ -18,17 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvReview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:overScrollMode="never"
-        android:padding="16dp"
-        android:scrollbarSize="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchBar" />
 
     <com.google.android.material.search.SearchView
         android:id="@+id/searchView"
@@ -51,5 +40,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvReview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:padding="16dp"
+        android:scrollbarSize="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

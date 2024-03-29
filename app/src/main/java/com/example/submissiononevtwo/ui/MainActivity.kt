@@ -1,9 +1,11 @@
 package com.example.submissiononevtwo.ui
 
+import MainViewModel
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.submissiononevtwo.data.response.GithubResponse
@@ -21,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-        private const val query = "Noorriz"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+
+        with(binding) {
+            searchView.setupWithSearchBar(searchBar)
+            searchView
+                .editText
+                .setOnEditorActionListener { textView, actionId, event ->
+                    searchBar.setText(searchView.text)
+                    getUsers(searchView.text.toString())
+                    searchView.hide()
+                    false
+                }
+        }
 
         reviewAdapter = ReviewAdapter()
         binding.rvReview.adapter = reviewAdapter
@@ -38,10 +53,10 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-        getUsers()
+        getUsers("") // Initial call without any query
     }
 
-    private fun getUsers() {
+    private fun getUsers(query: String) {
         showLoading(true)
         val client = ApiConfig.getApiService().getUsers(query)
         client.enqueue(object : Callback<GithubResponse> {

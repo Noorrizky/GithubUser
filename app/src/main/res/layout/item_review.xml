@@ -14,7 +14,6 @@
         android:contentDescription="@string/avatar_image"
         android:src="@drawable/placeholder_avatar"
         />
-<!--        android:background="@drawable/circle_background"-->
 
     <TextView
         android:id="@+id/tvItem"
