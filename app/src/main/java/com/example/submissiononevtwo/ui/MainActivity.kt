@@ -1,9 +1,11 @@
 package com.example.submissiononevtwo.ui
 
+
 import MainViewModel
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -33,13 +35,19 @@ class MainActivity : AppCompatActivity() {
 
         val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
+        if(mainViewModel.listUser.value == null) mainViewModel.getUsers("")
+        mainViewModel.listUser.observe(this){
+            it?.let{
+                setUserList(it)
+            }
+        }
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView
                 .editText
                 .setOnEditorActionListener { textView, actionId, event ->
                     searchBar.setText(searchView.text)
-                    getUsers(searchView.text.toString())
+                    mainViewModel.getUsers(searchView.text.toString())
                     searchView.hide()
                     false
                 }
@@ -53,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-        getUsers("") // Initial call without any query
+        getUsers("")
     }
 
     private fun getUsers(query: String) {
@@ -81,7 +89,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUserList(userList: List<ItemsItem>?) {
-        userList?.let { reviewAdapter.submitList(it) }
+        if (userList.isNullOrEmpty()) {
+            reviewAdapter.submitList(emptyList())
+            binding.progressBar.visibility = View.GONE
+            Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+        } else {
+            reviewAdapter.submitList(userList)
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
