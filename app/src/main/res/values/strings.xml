@@ -48,4 +48,8 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="followers">followers</string>
+    <string name="following">following</string>
+    <string name="username">username</string>
+    <string name="id">id\n</string>
 </resources>

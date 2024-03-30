@@ -1,7 +1,7 @@
 package com.example.submissiononevtwo.ui
 
-
-import MainViewModel
+import DetailUserActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var reviewAdapter: ReviewAdapter
+    private lateinit var mainViewModel: MainViewModel
 
     companion object {
         private const val TAG = "MainActivity"
@@ -33,14 +34,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        if(mainViewModel.listUser.value == null) mainViewModel.getUsers("")
-        mainViewModel.listUser.observe(this){
-            it?.let{
+        if (mainViewModel.listUser.value == null) mainViewModel.getUsers("")
+        mainViewModel.listUser.observe(this) {
+            it?.let {
                 setUserList(it)
             }
         }
+
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView
@@ -61,7 +63,13 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-        getUsers("")
+        reviewAdapter.setOnItemClickListener { item ->
+            val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
+            intent.putExtra("username", item.login)
+            startActivity(intent)
+        }
+
+        getUsers("Arif")
     }
 
     private fun getUsers(query: String) {
@@ -79,7 +87,6 @@ class MainActivity : AppCompatActivity() {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
-
 
             override fun onFailure(call: Call<GithubResponse>, t: Throwable) {
                 showLoading(false)
@@ -101,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
-        } else  {
+        } else {
             binding.progressBar.visibility = View.GONE
         }
     }

@@ -1,3 +1,4 @@
+import com.example.submissiononevtwo.data.response.DetailUserResponse
 import com.example.submissiononevtwo.data.response.GithubResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -11,4 +12,8 @@ interface ApiService {
     fun getUsers(
         @Query("q") username: String
     ): Call<GithubResponse>
+
+    @GET("users/{username}")
+    @Headers("Authorization: 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")
+    fun getDetailUser(@Path("username") username: String): Call<DetailUserResponse>
 }
