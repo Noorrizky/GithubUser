@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.submissiononevtwo.databinding.FragmentFollowBinding
-import com.example.submissiononevtwo.ui.FollowFragmentViewModel
-import com.example.submissiononevtwo.ui.ReviewAdapter
 
 class FollowFragment : Fragment() {
 
-    private lateinit var binding: FragmentFollowBinding
-    private val viewModel: FollowFragmentViewModel by viewModels()
+    private var _binding: FragmentFollowBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var viewModel: FollowFragmentViewModel
     private lateinit var adapter: ReviewAdapter
 
     override fun onCreateView(
@@ -21,45 +21,46 @@ class FollowFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFollowBinding.inflate(inflater, container, false)
+        _binding = FragmentFollowBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(this).get(FollowFragmentViewModel::class.java)
         adapter = ReviewAdapter()
+
+        binding.recyclerViewFollow.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewFollow.adapter = adapter
 
         val position = requireArguments().getInt(ARG_POSITION)
         val username = requireArguments().getString(ARG_USERNAME)
 
         if (position == 1) {
             viewModel.fetchFollowing(username ?: "")
-            viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-                showLoading(isLoading)
-            }
             viewModel.following.observe(viewLifecycleOwner) { following ->
                 adapter.submitList(following)
             }
         } else {
             viewModel.fetchFollowers(username ?: "")
-            viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-                showLoading(isLoading)
-            }
             viewModel.followers.observe(viewLifecycleOwner) { followers ->
                 adapter.submitList(followers)
             }
         }
 
-        binding.recyclerViewFollow.adapter = adapter
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
