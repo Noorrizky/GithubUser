@@ -60,7 +60,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabTextColor="@android:color/white"
+        app:tabTextColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@+id/tvFollowers"
         />
     <androidx.viewpager2.widget.ViewPager2
@@ -69,6 +69,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tabs"
         />
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"

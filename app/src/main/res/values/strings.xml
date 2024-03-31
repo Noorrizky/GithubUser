@@ -52,4 +52,5 @@
     <string name="following">following</string>
     <string name="username">username</string>
     <string name="id">id\n</string>
+    <string name="empty_list_message">empty_list_message\n</string>
 </resources>
