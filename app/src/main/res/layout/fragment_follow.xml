@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.FollowFragment">
 
-    <!-- Text view to display test username -->
     <TextView
         android:id="@+id/testUsername"
         android:layout_width="wrap_content"
@@ -15,19 +14,23 @@
         android:textSize="18sp"
         tools:text="Test Username" />
 
-    <!-- RecyclerView to display followers/following -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFollow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
-    <!-- Placeholder text view -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"
         android:visibility="gone" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 </FrameLayout>
 

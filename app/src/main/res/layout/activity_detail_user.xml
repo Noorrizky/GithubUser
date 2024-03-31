@@ -37,6 +37,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <TextView
+        android:id="@+id/tvFollowers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvFollowing"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+
+    <TextView
         android:id="@+id/tvFollowing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,15 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
-    <TextView
-        android:id="@+id/tvFollowers"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvFollowing"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"

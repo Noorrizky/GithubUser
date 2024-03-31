@@ -5,63 +5,65 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.submissiononevtwo.databinding.FragmentFollowBinding
+import com.example.submissiononevtwo.ui.FollowFragmentViewModel
+import com.example.submissiononevtwo.ui.ReviewAdapter
 
 class FollowFragment : Fragment() {
 
-    private var _binding: FragmentFollowBinding? = null
-    private val binding get() = _binding!!
-
-    companion object {
-        const val ARG_POSITION = "position"
-        const val ARG_USERNAME = "username"
-    }
+    private lateinit var binding: FragmentFollowBinding
+    private val viewModel: FollowFragmentViewModel by viewModels()
+    private lateinit var adapter: ReviewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFollowBinding.inflate(inflater, container, false)
+        binding = FragmentFollowBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        adapter = ReviewAdapter()
+
         val position = requireArguments().getInt(ARG_POSITION)
         val username = requireArguments().getString(ARG_USERNAME)
 
-        val viewModel = ViewModelProvider(this).get(FollowFragmentViewModel::class.java)
-
-        // Ambil data pengikut jika posisi adalah 1
         if (position == 1) {
-            viewModel.fetchFollowers(username ?: "")
-            viewModel.followers.observe(viewLifecycleOwner) { followers ->
-                // Update RecyclerView dengan data pengikut yang diterima
-                // recyclerViewFollow.adapter = FollowersAdapter(followers)
-                // recyclerViewFollow.visibility = View.VISIBLE
-                // placeholderTextView.visibility = View.GONE
-                binding.testUsername.text = "Followers count: ${followers.size}"
+            viewModel.fetchFollowing(username ?: "")
+            viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                showLoading(isLoading)
+            }
+            viewModel.following.observe(viewLifecycleOwner) { following ->
+                adapter.submitList(following)
             }
         } else {
-            // Ambil data yang diikuti jika posisi bukan 1
-            viewModel.fetchFollowing(username ?: "")
-            viewModel.following.observe(viewLifecycleOwner) { following ->
-                // Update RecyclerView dengan data yang diikuti yang diterima
-                // recyclerViewFollow.adapter = FollowingAdapter(following)
-                // recyclerViewFollow.visibility = View.VISIBLE
-                // placeholderTextView.visibility = View.GONE
-                binding.testUsername.text = "Following count: ${following.size}"
+            viewModel.fetchFollowers(username ?: "")
+            viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+                showLoading(isLoading)
             }
+            viewModel.followers.observe(viewLifecycleOwner) { followers ->
+                adapter.submitList(followers)
+            }
+        }
+
+        binding.recyclerViewFollow.adapter = adapter
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    companion object {
+        const val ARG_POSITION = "position"
+        const val ARG_USERNAME = "username"
     }
 }
-
-

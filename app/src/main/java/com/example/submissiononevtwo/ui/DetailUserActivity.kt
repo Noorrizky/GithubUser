@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import com.example.submissiononevtwo.R
 import com.example.submissiononevtwo.data.response.DetailUserResponse
 import com.example.submissiononevtwo.data.retrofit.ApiConfig
 import com.example.submissiononevtwo.databinding.ActivityDetailUserBinding
@@ -27,21 +28,17 @@ class DetailUserActivity : AppCompatActivity() {
 
         val username = intent.getStringExtra("username") ?: ""
 
-        // Inisialisasi adapter untuk ViewPager2
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
         sectionsPagerAdapter.username = username
         binding.viewPager.adapter = sectionsPagerAdapter
 
-        // Menghubungkan ViewPager2 dengan TabLayout menggunakan TabLayoutMediator
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             // Sesuaikan teks tab sesuai dengan posisi
-            tab.text = if (position == 0) "Followers" else "Following"
+            tab.text = if (position == 0)  "Following" else "Followers"
         }.attach()
 
-        // Show loading progress initially
         showLoading(true)
 
-        // Get user detail
         getUserDetail(username)
     }
 
@@ -55,11 +52,9 @@ class DetailUserActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val user = response.body()
                     user?.let {
-                        // Update UI with fetched user information
                         updateUserUI(it)
                     }
                 } else {
-                    // Handle unsuccessful response
                 }
             }
 
@@ -67,7 +62,6 @@ class DetailUserActivity : AppCompatActivity() {
                 // Hide loading indicator
                 showLoading(false)
 
-                // Handle failure
             }
         })
     }
@@ -81,9 +75,8 @@ class DetailUserActivity : AppCompatActivity() {
 
             tvName.text = user.name ?: "Unknown"
             tvUsername.text = user.login
-            tvFollowers.text = user.followers.toString()
-            tvFollowing.text = user.following.toString()
-            // Update other UI elements as needed
+            tvFollowing.text = getString(R.string.following_count, user.following)
+            tvFollowers.text = getString(R.string.followers_count, user.followers)
         }
     }
 

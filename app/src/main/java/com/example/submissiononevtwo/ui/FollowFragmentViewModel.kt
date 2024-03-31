@@ -10,6 +10,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowFragmentViewModel : ViewModel() {
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     private val _followers = MutableLiveData<List<ItemsItem>>()
     val followers: LiveData<List<ItemsItem>> = _followers
 
@@ -17,45 +20,43 @@ class FollowFragmentViewModel : ViewModel() {
     val following: LiveData<List<ItemsItem>> = _following
 
     fun fetchFollowers(username: String) {
-        val client = ApiConfig.getApiService()
-        val call = client.getFollowers(username)
-
-        call.enqueue(object : Callback<List<ItemsItem>> {
+        _isLoading.value = true
+        val client = ApiConfig.getApiService().getFollowers(username)
+        client.enqueue(object : Callback<List<ItemsItem>> {
             override fun onResponse(
                 call: Call<List<ItemsItem>>,
                 response: Response<List<ItemsItem>>
             ) {
+                _isLoading.value = false
                 if (response.isSuccessful) {
-                    _followers.postValue(response.body())
+                    _followers.value = response.body()
                 } else {
-                    // Handle unsuccessful response
                 }
             }
 
             override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
-                // Handle failure
+                _isLoading.value = false
             }
         })
     }
 
     fun fetchFollowing(username: String) {
-        val client = ApiConfig.getApiService()
-        val call = client.getFollowing(username)
-
-        call.enqueue(object : Callback<List<ItemsItem>> {
+        _isLoading.value = true
+        val client = ApiConfig.getApiService().getFollowing(username)
+        client.enqueue(object : Callback<List<ItemsItem>> {
             override fun onResponse(
                 call: Call<List<ItemsItem>>,
                 response: Response<List<ItemsItem>>
             ) {
+                _isLoading.value = false
                 if (response.isSuccessful) {
-                    _following.postValue(response.body())
+                    _following.value = response.body()
                 } else {
-                    // Handle unsuccessful response
                 }
             }
 
             override fun onFailure(call: Call<List<ItemsItem>>, t: Throwable) {
-                // Handle failure
+                _isLoading.value = false
             }
         })
     }
