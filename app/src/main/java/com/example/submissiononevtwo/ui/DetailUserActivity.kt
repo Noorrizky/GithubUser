@@ -34,7 +34,7 @@ class DetailUserActivity : AppCompatActivity() {
             tab.text = if (position == 0)  "Following" else "Followers"
         }.attach()
 
-//        showLoading(true)
+        showLoading(true)
 
         getUserDetail(username)
     }
