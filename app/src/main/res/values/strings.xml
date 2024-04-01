@@ -55,4 +55,5 @@
     <string name="username">username</string>
     <string name="id">id\n</string>
     <string name="empty_list_message">empty_list_message\n</string>
+    <string name="back_button_description">back_button\n</string>
 </resources>

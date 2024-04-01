@@ -18,21 +18,21 @@ class DetailUserViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun getUser(username: String) {
-        _isLoading.value = true // Show loading indicator
+        _isLoading.value = true
         val client = ApiConfig.getApiService().getDetailUser(username)
         client.enqueue(object : Callback<DetailUserResponse> {
             override fun onResponse(
                 call: Call<DetailUserResponse>,
                 response: Response<DetailUserResponse>
             ) {
-                _isLoading.value = false // Hide loading indicator
+                _isLoading.value = false
                 if (response.isSuccessful) {
                     _user.value = response.body()
                 }
             }
 
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
-                _isLoading.value = false // Hide loading indicator
+                _isLoading.value = false
             }
         })
     }

@@ -8,6 +8,19 @@
     tools:context=".ui.DetailUserActivity">
 
     <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_back_arrow"
+        android:contentDescription="@string/back_button_description"
+        android:onClick="onBackButtonClicked"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
         android:id="@+id/ivAvatar"
         android:layout_width="195dp"
         android:layout_height="195dp"
@@ -67,7 +80,8 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs"
         />
 

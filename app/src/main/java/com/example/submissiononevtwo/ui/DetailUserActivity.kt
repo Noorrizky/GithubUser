@@ -3,7 +3,6 @@ package com.example.submissiononevtwo.ui
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -11,7 +10,6 @@ import com.example.submissiononevtwo.R
 import com.example.submissiononevtwo.data.response.DetailUserResponse
 import com.example.submissiononevtwo.data.retrofit.ApiConfig
 import com.example.submissiononevtwo.databinding.ActivityDetailUserBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,11 +31,10 @@ class DetailUserActivity : AppCompatActivity() {
         binding.viewPager.adapter = sectionsPagerAdapter
 
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
-            // Sesuaikan teks tab sesuai dengan posisi
             tab.text = if (position == 0)  "Following" else "Followers"
         }.attach()
 
-        showLoading(true)
+//        showLoading(true)
 
         getUserDetail(username)
     }
@@ -46,7 +43,6 @@ class DetailUserActivity : AppCompatActivity() {
         val client = ApiConfig.getApiService().getDetailUser(username)
         client.enqueue(object : Callback<DetailUserResponse> {
             override fun onResponse(call: Call<DetailUserResponse>, response: Response<DetailUserResponse>) {
-                // Hide loading indicator
                 showLoading(false)
 
                 if (response.isSuccessful) {
@@ -59,7 +55,7 @@ class DetailUserActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
-                // Hide loading indicator
+
                 showLoading(false)
 
             }
@@ -86,6 +82,9 @@ class DetailUserActivity : AppCompatActivity() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
+    }
+    fun onBackButtonClicked(view: View) {
+        finish()
     }
 }
 
