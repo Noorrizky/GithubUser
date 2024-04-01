@@ -31,8 +31,8 @@ class FollowFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(FollowFragmentViewModel::class.java)
         adapter = ReviewAdapter()
 
-        binding.recyclerViewFollow.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewFollow.adapter = adapter
+        binding.rvReview.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvReview.adapter = adapter
 
         val position = requireArguments().getInt(ARG_POSITION)
         val username = requireArguments().getString(ARG_USERNAME)
