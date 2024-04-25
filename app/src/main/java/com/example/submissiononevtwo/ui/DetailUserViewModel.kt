@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.submissiononevtwo.data.response.DetailUserResponse
 import com.example.submissiononevtwo.data.retrofit.ApiConfig
+import com.example.submissiononevtwo.repository.FavoriteUserRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -4,15 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.submissiononevtwo.R
 import com.example.submissiononevtwo.data.response.GithubResponse
 import com.example.submissiononevtwo.data.response.ItemsItem
 import com.example.submissiononevtwo.data.retrofit.ApiConfig
 import com.example.submissiononevtwo.databinding.ActivityMainBinding
+import com.example.submissiononevtwo.helper.ViewModelFactory
+import com.example.submissiononevtwo.utils.SettingPreferences
+import com.example.submissiononevtwo.utils.dataStore
+import com.google.android.material.switchmaterial.SwitchMaterial
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,8 +74,33 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("username", item.login)
             startActivity(intent)
         }
-
         getUsers("Arif")
+
+//        TODO SWITCH THEME
+//        val switchTheme = findViewById<Button>(R.id.switch_theme)
+//
+//        val pref = SettingPreferences.getInstance(application.dataStore)
+//        val mainViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(MainViewModel::class.java)
+//
+//// Observe the theme settings
+//        mainViewModel.getThemeSettings().observe(this) { isDarkModeActive ->
+//            if (isDarkModeActive) {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//            } else {
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//            }
+//        }
+//
+//        switchTheme.setOnClickListener {
+//            // Get the current theme setting
+//            val currentThemeSetting = mainViewModel.getThemeSettings().value ?: false
+//
+//            // Save the new theme setting
+//            val newThemeSetting = !currentThemeSetting
+//            mainViewModel.saveThemeSetting(newThemeSetting)
+//        }
+//          TODO SWTICH THEME
+
     }
 
     private fun getUsers(query: String) {
