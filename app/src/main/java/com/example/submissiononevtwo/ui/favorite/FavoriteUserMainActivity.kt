@@ -9,12 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.submissiononevtwo.database.FavoriteUser
 import com.example.submissiononevtwo.databinding.ActivityFavoriteUserMainBinding
-import com.example.submissiononevtwo.helper.ViewModelFactory
 import com.example.submissiononevtwo.ui.DetailUserActivity
 
 class FavoriteUserMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteUserMainBinding
-    private lateinit var favoriteUserViewModel: FavoriteUserViewModel
+    private lateinit var favoriteUserViewModel: FavoriteUsersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,12 +48,12 @@ class FavoriteUserMainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getViewModel(activity: AppCompatActivity): FavoriteUserViewModel {
-        val factory = ViewModelFactory.getInstances(activity.application, activity)
-//        val factory = FavoriteUserViewModelFactory.getInstance(activity.application)
+    private fun getViewModel(activity: AppCompatActivity): FavoriteUsersViewModel {
+//        val factory = ViewModelFactory.getInstances(activity.application, activity)
+        val factory = FavoriteUserViewModelFactory.getInstance(activity.application)
 //        val factory = ViewModelFactory.getInstances(activity.application, activity)
 
-        return ViewModelProvider(activity, factory)[FavoriteUserViewModel::class.java]
+        return ViewModelProvider(activity, factory)[FavoriteUsersViewModel::class.java]
     }
 
     private fun loading(state: Boolean) {
