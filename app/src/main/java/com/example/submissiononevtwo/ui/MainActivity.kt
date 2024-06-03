@@ -17,8 +17,10 @@ import com.example.submissiononevtwo.data.response.ItemsItem
 import com.example.submissiononevtwo.data.retrofit.ApiConfig
 import com.example.submissiononevtwo.databinding.ActivityMainBinding
 import com.example.submissiononevtwo.helper.ViewModelFactory
+import com.example.submissiononevtwo.ui.favorite.FavoriteUserMainActivity
 import com.example.submissiononevtwo.utils.SettingPreferences
 import com.example.submissiononevtwo.utils.dataStore
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var reviewAdapter: ReviewAdapter
     private lateinit var mainViewModel: MainViewModel
+
 
     companion object {
         private const val TAG = "MainActivity"
@@ -76,6 +79,15 @@ class MainActivity : AppCompatActivity() {
         }
         getUsers("Arif")
 
+//        Favorite User Button
+        val fabFavorite = findViewById<FloatingActionButton>(R.id.fab_favorite)
+        fabFavorite.setOnClickListener {
+            val intent = Intent(this@MainActivity, FavoriteUserMainActivity::class.java)
+            startActivity(intent)
+        }
+//        Favorite User Button
+
+
 //        TODO SWITCH THEME
 //        val switchTheme = findViewById<Button>(R.id.switch_theme)
 //
@@ -102,6 +114,7 @@ class MainActivity : AppCompatActivity() {
 //          TODO SWTICH THEME
 
     }
+
 
     private fun getUsers(query: String) {
         showLoading(true)

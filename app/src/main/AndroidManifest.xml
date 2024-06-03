@@ -15,6 +15,9 @@
         android:theme="@style/Theme.SubmissionOneVtwo"
         tools:targetApi="31">
         <activity
+            android:name=".ui.favorite.FavoriteUserMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.DetailUserActivity"
             android:exported="false" />
         <activity

@@ -83,6 +83,8 @@ class DetailUserActivity : AppCompatActivity() {
             tvFollowing.text = getString(R.string.following_count, user.following)
             tvFollowers.text = getString(R.string.followers_count, user.followers)
 
+
+//            BAGIAN INSERT DELETE
             favoriteUserViewModel.getFavoriteUserByUsername(user.login).observe(this@DetailUserActivity){
                 data ->
                 val isFavorite = data != null
@@ -109,7 +111,6 @@ class DetailUserActivity : AppCompatActivity() {
                     }
                 }
             }
-
         }
 
 
@@ -122,6 +123,9 @@ class DetailUserActivity : AppCompatActivity() {
     }
     fun onBackButtonClicked(view: View) {
         finish()
+    }
+    companion object {
+        const val EXTRA_USERNAME = "extra_username"
     }
 }
 
