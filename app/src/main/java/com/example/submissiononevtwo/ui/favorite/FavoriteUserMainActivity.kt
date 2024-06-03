@@ -22,7 +22,7 @@ class FavoriteUserMainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-//        supportActionBar?.title = "Favorite User"
+        supportActionBar?.title = "Favorite User"
         loading(true)
         favoriteUserViewModel = getViewModel(this)
         favoriteUserViewModel.favoriteUsers.observe(this) { favoriteUsers ->
@@ -51,8 +51,6 @@ class FavoriteUserMainActivity : AppCompatActivity() {
 
     private fun getViewModel(activity: AppCompatActivity): ListFavoriteUserViewModel {
         val factory = ViewModelFactory.getInstances(activity.application, activity)
-//        val factory = FavoriteUserViewModelFactory.getInstance(activity.application)
-//        val factory = ViewModelFactory.getInstances(activity.application, activity)
 
         return ViewModelProvider(activity, factory)[ListFavoriteUserViewModel::class.java]
     }
