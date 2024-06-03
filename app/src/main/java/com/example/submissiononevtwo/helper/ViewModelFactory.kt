@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.submissiononevtwo.ui.MainViewModel
-import com.example.submissiononevtwo.ui.favorite.FavoriteUsersViewModel
+import com.example.submissiononevtwo.ui.insert.FavoriteUserViewModel
 import com.example.submissiononevtwo.utils.SettingPreferences
 import com.example.submissiononevtwo.utils.dataStore
 import java.lang.IllegalArgumentException
@@ -32,8 +32,8 @@ class ViewModelFactory private constructor(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass:Class<T>):T{
-        if(modelClass.isAssignableFrom(FavoriteUsersViewModel::class.java)){
-            return FavoriteUsersViewModel(mApplication) as T
+        if(modelClass.isAssignableFrom(FavoriteUserViewModel::class.java)){
+            return FavoriteUserViewModel(mApplication) as T
         }else if(modelClass.isAssignableFrom((MainViewModel::class.java))){
             return MainViewModel as T
         }

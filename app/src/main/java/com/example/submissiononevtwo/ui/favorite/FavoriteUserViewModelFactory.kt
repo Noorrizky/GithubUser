@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 class FavoriteUserViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory(){
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FavoriteUsersViewModel::class.java)){
+        if (modelClass.isAssignableFrom(ListFavoriteUserViewModel::class.java)){
             return com.example.submissiononevtwo.ui.insert.FavoriteUserViewModel(mApplication) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: "+modelClass.name)
