@@ -14,7 +14,7 @@
     <string name="following_count">%d Following</string>
     <string name="followers_count">%d Followers</string>
 
-
+    <string name="dark_mode">Dark Mode</string>
     <string name="followers">followers</string>
     <string name="following">following</string>
     <string name="username">username</string>

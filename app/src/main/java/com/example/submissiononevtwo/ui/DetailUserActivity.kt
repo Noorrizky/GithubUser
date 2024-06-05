@@ -33,8 +33,6 @@ class DetailUserActivity : AppCompatActivity() {
 
         val username = intent.getStringExtra("username") ?: ""
 
-
-
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
         sectionsPagerAdapter.username = username
         binding.viewPager.adapter = sectionsPagerAdapter
@@ -89,7 +87,7 @@ class DetailUserActivity : AppCompatActivity() {
                 data ->
                 val isFavorite = data != null
 
-        //        Favorite INSERT
+        //        Favorite INSERT Icon
                 fabFavorite.setImageResource(
                     if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_1
                 )
@@ -124,9 +122,7 @@ class DetailUserActivity : AppCompatActivity() {
     fun onBackButtonClicked(view: View) {
         finish()
     }
-    companion object {
-        const val EXTRA_USERNAME = "extra_username"
-    }
+
 }
 
 

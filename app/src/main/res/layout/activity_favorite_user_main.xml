@@ -21,6 +21,17 @@
         app:layout_constraintVertical_bias="0.18"
         tools:visibility="visible" />
 
+    <TextView
+        android:id="@+id/tv_no_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No user in favorite"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavoriteUser"
         android:layout_width="0dp"

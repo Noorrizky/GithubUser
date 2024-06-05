@@ -5,9 +5,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.submissiononevtwo.ui.MainViewModel
+import com.example.submissiononevtwo.ui.darkmode.SettingPreferences
+import com.example.submissiononevtwo.ui.darkmode.dataStore
 import com.example.submissiononevtwo.ui.insert.FavoriteUserViewModel
-import com.example.submissiononevtwo.utils.SettingPreferences
-import com.example.submissiononevtwo.utils.dataStore
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory private constructor(
