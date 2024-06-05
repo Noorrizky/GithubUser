@@ -30,7 +30,7 @@ class DetailUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.hide()
         val username = intent.getStringExtra("username") ?: ""
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
