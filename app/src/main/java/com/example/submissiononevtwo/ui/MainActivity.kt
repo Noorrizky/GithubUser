@@ -16,6 +16,10 @@ import com.example.submissiononevtwo.data.response.ItemsItem
 import com.example.submissiononevtwo.data.retrofit.ApiConfig
 import com.example.submissiononevtwo.databinding.ActivityMainBinding
 import com.example.submissiononevtwo.ui.darkmode.DarkModeActivity
+import com.example.submissiononevtwo.ui.darkmode.DarkModeViewModel
+import com.example.submissiononevtwo.ui.darkmode.DarkModeViewModelFactory
+import com.example.submissiononevtwo.ui.darkmode.SettingPreferences
+import com.example.submissiononevtwo.ui.darkmode.dataStore
 import com.example.submissiononevtwo.ui.favorite.FavoriteUserMainActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
@@ -27,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var reviewAdapter: ReviewAdapter
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var darkModeViewModel: DarkModeViewModel
 
     companion object {
         private const val TAG = "MainActivity"
@@ -35,7 +40,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        Observer Dark MODE
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        darkModeViewModel = ViewModelProvider(this, DarkModeViewModelFactory(pref)).get(
+            DarkModeViewModel::class.java)
+//        Observer Dark MODE
 
+        darkModeViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+//        Observer Dark MODE
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -56,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 .editText
                 .setOnEditorActionListener { textView, actionId, event ->
                     searchBar.setText(searchView.text)
-                    mainViewModel.getUsers(searchView.text.toString())
+                    getUsers(searchView.text.toString())
                     searchView.hide()
                     false
                 }
