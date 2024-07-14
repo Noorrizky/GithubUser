@@ -10,8 +10,7 @@ Welcome to the GithubUser repository! This project is an Android application tha
 
 ## Features
 - Search GitHub users.
-- View user details and repositories.
-- Follows MVVM architecture.
+- View user details.
 
 ## Installation
 
